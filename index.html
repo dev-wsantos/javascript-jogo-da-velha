@@ -8,9 +8,20 @@
   </head>
   <body>
     <h1>Jogo da Velha</h1>
-    <div class="buttons-container">
+    <div id="buttons-container">
       <button id="2-players">2 Jogadores</button>
       <button id="ia-players">2 Jogadores</button>
+    </div>
+    <div id="scoreboard-container">
+      <h2>Placar</h2>
+      <span class="score-box">
+        <span id="x-scoreboard">X</span>
+        <span id="scoreboard-1">: 0</span>
+      </span>
+      <span class="score-box" bola>
+        <span id="o-scoreboard"></span>
+        <span id="scoreboard-2">: 0</span>
+      </span>
     </div>
 
     <div id="container" class="hide">
@@ -25,16 +36,7 @@
       <div class="box" id="block-8"></div>
       <div class="box" id="block-9"></div>
 
-      <div class="scoreboard-container">
-        <span class="score-box">
-          <span id="x-scoreboard">X</span>
-          <span id="scoreboard-1">0</span>
-        </span>
-        <span class="score-box">
-          <span id="x-scoreboard"></span>
-          <span id="scoreboard-2">0</span>
-        </span>
-      </div>
+
 
     </div>
 
@@ -43,8 +45,8 @@
       <div class="o"></div>
     </div>
 
-    <div id="message hide">
-      <p></p>
+    <div id="message" class="hide">
+      <p>Jogador 1 Venceu</p>
     </div>
 
   <script src="js/scripts.js"></script>

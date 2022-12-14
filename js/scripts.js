@@ -27,6 +27,12 @@ for (let w = 0; w < boxes.length; w++) {
       // computando a jogada
       if (player1 == player2) {
         player1++;
+
+        if (secondPlayer == 'ia-player') {
+          jogadaComputador();
+          player2++;
+        }
+
       } else {
         player2++;
       }
@@ -34,6 +40,22 @@ for (let w = 0; w < boxes.length; w++) {
       checarCondicaoVitoria();
     }
 
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener('click', function () {
+    secondPlayer = this.getAttribute('id');
+
+    for (let j = 0; j < buttons.length; j++) {
+      buttons[j].style.display = 'none';
+    }
+
+    setTimeout(function () {
+      let container = document.querySelector('#container');
+      container.classList.remove('hide');
+
+    }, 500)
   });
 }
 
@@ -161,13 +183,13 @@ function checarCondicaoVitoria() {
 
   let contador = 0;
 
-  for(let a = 0; a < boxes.length; a++){
+  for (let a = 0; a < boxes.length; a++) {
     if (boxes[a].childNodes[0] != undefined) {
       contador++;
     }
   }
 
-  if (contador == 9){
+  if (contador == 9) {
     declararVencedor();
   }
 }
@@ -176,10 +198,10 @@ function declararVencedor(vencedor) {
   let scoreboardX = document.querySelector('#scoreboard-1');
   let scoreboardO = document.querySelector('#scoreboard-2');
 
-  if (vencedor == 'x'){
-     scoreboardX.textContent = parseInt(scoreboardX.textContent) + 1;
-     msg = "O Jogador 1 venceu!";
-  } else if (vencedor == 'o') { 
+  if (vencedor == 'x') {
+    scoreboardX.textContent = parseInt(scoreboardX.textContent) + 1;
+    msg = "O Jogador 1 venceu!";
+  } else if (vencedor == 'o') {
     scoreboardO.textContent = parseInt(scoreboardO.textContent) + 1;
     msg = "O Jogador 2 venceu!"
   } else {
@@ -189,20 +211,45 @@ function declararVencedor(vencedor) {
   messageText.innerHTML = msg;
   messageContainer.classList.remove("hide");
 
-  setTimeout(function(){
+  setTimeout(function () {
     messageContainer.classList.add("hide");
 
     player1 = 0;
     player2 = 0;
-    
+
     let boxesToRemove = document.querySelectorAll('.box div');
 
-    for (let w = 0; w < boxesToRemove.length; w++){
+    for (let w = 0; w < boxesToRemove.length; w++) {
       boxesToRemove[w].parentNode.removeChild(boxesToRemove[w]);
     }
 
   }, 3000);
 
+}
+
+function jogadaComputador() {
+  let cloneO = o.cloneNode(true);
+  contador = 0;
+  preenchido = 0;
+
+  for (let b = 0; b < boxes.length; b++) {
+    let random = Math.floor(Math.random() * 5);
+
+    if (boxes[b].childNodes[0] == undefined) {
+      if (random <= 1) {
+        boxes[b].appendChild(cloneO);
+        contador++;
+        break;
+
+      } else {
+        preenchido++;
+      }
+    }
+  }
+
+  if (contador == 0 && preenchido < 9) {
+    jogadaComputador();
+  }
 }
 
 

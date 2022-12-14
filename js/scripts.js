@@ -64,9 +64,9 @@ function checarCondicaoVitoria() {
     let b3Child = blocks[3].childNodes[0].className;
 
     if (b1Child == 'x' && b2Child == 'x' && b3Child == 'x') {
-      console.log("O X VENCEU");
+      declararVencedor('x');
     } else if (b1Child == 'o' && b2Child == 'o' && b3Child == 'o') {
-      console.log('A O VENCEU');
+      declararVencedor('o');
     }
   }
 
@@ -77,9 +77,9 @@ function checarCondicaoVitoria() {
     let b3Child = blocks[6].childNodes[0].className;
 
     if (b1Child == 'x' && b2Child == 'x' && b3Child == 'x') {
-      console.log("O X VENCEU");
+      declararVencedor('x');
     } else if (b1Child == 'o' && b2Child == 'o' && b3Child == 'o') {
-      console.log('A O VENCEU');
+      declararVencedor('o');
     }
   }
 
@@ -90,9 +90,9 @@ function checarCondicaoVitoria() {
     let b3Child = blocks[9].childNodes[0].className;
 
     if (b1Child == 'x' && b2Child == 'x' && b3Child == 'x') {
-      console.log("O X VENCEU");
+      declararVencedor('x');
     } else if (b1Child == 'o' && b2Child == 'o' && b3Child == 'o') {
-      console.log('A O VENCEU');
+      declararVencedor('o');
     }
   }
 
@@ -103,9 +103,9 @@ function checarCondicaoVitoria() {
     let b3Child = blocks[7].childNodes[0].className;
 
     if (b1Child == 'x' && b2Child == 'x' && b3Child == 'x') {
-      console.log("O X VENCEU");
+      declararVencedor('x');
     } else if (b1Child == 'o' && b2Child == 'o' && b3Child == 'o') {
-      console.log('A O VENCEU');
+      declararVencedor('o');
     }
   }
 
@@ -116,9 +116,9 @@ function checarCondicaoVitoria() {
     let b3Child = blocks[8].childNodes[0].className;
 
     if (b1Child == 'x' && b2Child == 'x' && b3Child == 'x') {
-      console.log("O X VENCEU");
+      declararVencedor('x');
     } else if (b1Child == 'o' && b2Child == 'o' && b3Child == 'o') {
-      console.log('A O VENCEU');
+      declararVencedor('o');
     }
   }
   if (blocks[3].childNodes.length > 0 && blocks[6].childNodes.length && blocks[9].childNodes.length > 0) {
@@ -128,9 +128,9 @@ function checarCondicaoVitoria() {
     let b3Child = blocks[9].childNodes[0].className;
 
     if (b1Child == 'x' && b2Child == 'x' && b3Child == 'x') {
-      console.log("O X VENCEU");
+      declararVencedor('x');
     } else if (b1Child == 'o' && b2Child == 'o' && b3Child == 'o') {
-      console.log('A O VENCEU');
+      declararVencedor('o');
     }
   }
   if (blocks[1].childNodes.length > 0 && blocks[5].childNodes.length && blocks[9].childNodes.length > 0) {
@@ -140,9 +140,9 @@ function checarCondicaoVitoria() {
     let b3Child = blocks[9].childNodes[0].className;
 
     if (b1Child == 'x' && b2Child == 'x' && b3Child == 'x') {
-      console.log("O X VENCEU");
+      declararVencedor('x');
     } else if (b1Child == 'o' && b2Child == 'o' && b3Child == 'o') {
-      console.log('A O VENCEU');
+      declararVencedor('o');
     }
   }
 
@@ -153,9 +153,9 @@ function checarCondicaoVitoria() {
     let b3Child = blocks[7].childNodes[0].className;
 
     if (b1Child == 'x' && b2Child == 'x' && b3Child == 'x') {
-      console.log("O X VENCEU");
+      declararVencedor('x');
     } else if (b1Child == 'o' && b2Child == 'o' && b3Child == 'o') {
-      console.log('A O VENCEU');
+      declararVencedor('o');
     }
   }
 
@@ -168,7 +168,42 @@ function checarCondicaoVitoria() {
   }
 
   if (contador == 9){
-    console.log('Deu velha');
+    declararVencedor();
   }
 }
+
+function declararVencedor(vencedor) {
+  let scoreboardX = document.querySelector('#scoreboard-1');
+  let scoreboardO = document.querySelector('#scoreboard-2');
+
+  if (vencedor == 'x'){
+     scoreboardX.textContent = parseInt(scoreboardX.textContent) + 1;
+     msg = "O Jogador 1 venceu!";
+  } else if (vencedor == 'o') { 
+    scoreboardO.textContent = parseInt(scoreboardO.textContent) + 1;
+    msg = "O Jogador 2 venceu!"
+  } else {
+    msg = "Deu Velha!";
+  }
+
+  messageText.innerHTML = msg;
+  messageContainer.classList.remove("hide");
+
+  setTimeout(function(){
+    messageContainer.classList.add("hide");
+
+    player1 = 0;
+    player2 = 0;
+    
+    let boxesToRemove = document.querySelectorAll('.box div');
+
+    for (let w = 0; w < boxesToRemove.length; w++){
+      boxesToRemove[w].parentNode.removeChild(boxesToRemove[w]);
+    }
+
+  }, 3000);
+
+}
+
+
 
